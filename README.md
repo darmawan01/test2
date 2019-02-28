@@ -3,3 +3,10 @@
 
 # text Request
     curl -s -XPOST -d'{"text":"awan"}' http://localhost
+
+# Unit Testing
+    - open terminal and go to test directory
+    - write command
+        ```
+            go test
+        ```
