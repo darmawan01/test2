@@ -6,12 +6,9 @@ import (
 	"net/http"
 	"sort"
 	"strings"
-)
 
-// Word models
-type Word struct {
-	Text string `json:"text"`
-}
+	"github.com/test2/models"
+)
 
 func logging(f http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -37,7 +34,7 @@ func sorting(s string) string {
 func welcome(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 
-	var word Word
+	var word models.Word
 	json.NewDecoder(r.Body).Decode(&word)
 	resolve := sorting(word.Text)
 
