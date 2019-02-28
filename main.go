@@ -20,6 +20,12 @@ func logging(f http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "GET")
+	(*w).Header().Set("Content-Type", "application/json; charset=UTF-8")
+}
+
 func sorting(s string) string {
 	text := strings.ToLower(s)
 	newText := strings.Split(text, "")
@@ -29,9 +35,10 @@ func sorting(s string) string {
 }
 
 func welcome(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
 	var word Word
 	json.NewDecoder(r.Body).Decode(&word)
-
 	resolve := sorting(word.Text)
 
 	word.Text = resolve
@@ -39,6 +46,7 @@ func welcome(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
 	http.HandleFunc("/", logging(welcome))
 
 	http.ListenAndServe(":80", nil)
