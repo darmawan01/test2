@@ -6,7 +6,4 @@
 
 # Unit Testing
     - open terminal and go to test directory
-    - write command
-        ```
-            go test
-        ```
+    - run command 'go test'
